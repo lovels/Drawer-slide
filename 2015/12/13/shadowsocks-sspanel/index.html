@@ -10,7 +10,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu-512mb-sfo1-01:~<span class="comment"># apt-get update</span></span><br><span class="line">root@ubuntu-512mb-sfo1-01:~<span class="comment"># apt-get install nginx</span></span><br><span class="line">root@ubuntu-512mb-sfo1-01:~<span class="comment"># apt-get install mysql-client mysql-server</span></span><br><span class="line">root@ubuntu-512mb-sfo1-01:~<span class="comment"># apt-get install php php-fpm php-cli php-cgi php-mysql php-gd</span></span><br></pre></td></tr></table></figure>
 <p>过程中如果没有错误，那就说明我们安装成功了，如果服务器中有这些环境，则可以忽略对应的步骤。</p>
 <p>接下来我们就要创建数据库了，运行<code>mysql -u root -p</code>，输入<code>root</code>密码。开始创建<code>shadowsocks</code>数据库，具体 SQL:<code>create database shadowsocks;</code> 如下图：</p>
-<p><img src="http://ww4.sinaimg.cn/large/9f1201f5gw1eyydknilqkj20vq0c2wkj.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/lovels/BlogResources/master/img/3322f6c7e5155b1e5f862d96f9bb927a.jpg" alt=""></p>
 <p>然后建立一个名为ss，密码为ss的MySQL用户，因为这个用户只能本地登录，所以密码简单点也无所谓：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;  grant all privileges on shadowsocks.* to ss@localhost identified by <span class="string">'ss'</span>;</span><br></pre></td></tr></table></figure>
 <p>创建完成我们退出MySQL:</p>
@@ -62,9 +62,9 @@
 <p>然后重启一下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu-512mb-sfo1-01:~<span class="comment"># shutdown -r now</span></span><br></pre></td></tr></table></figure>
 <p>然后我们访问<code>http://ip:443</code>就可以看到ss-panel前端界面了：</p>
-<p><img src="http://ww1.sinaimg.cn/large/9f1201f5gw1eyydl4hdbuj21kw15edog.jpg" alt=""></p>
-<p>后端我们可以<code>http://ip:443/admin</code>界面如下<br><img src="http://ww1.sinaimg.cn/large/9f1201f5gw1eyydlkveq7j20rs0jygmc.jpg" alt=""><br>如果不知道账户名，密码的话，我们可以去数据库查一下，我们可以登录数据库中，看一下<code>shadowsocks</code>库中的表</p>
-<p><img src="http://ww1.sinaimg.cn/large/9f1201f5gw1eyydlxnkt2j20jq0akmz7.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/lovels/BlogResources/master/img/9f1201f5gw1eyydl4hdbuj21kw15edog.jpg" alt=""></p>
+<p>后端我们可以<code>http://ip:443/admin</code>界面如下<br><img src="https://raw.githubusercontent.com/lovels/BlogResources/master/img/20200409142234.png" alt=""><br>如果不知道账户名，密码的话，我们可以去数据库查一下，我们可以登录数据库中，看一下<code>shadowsocks</code>库中的表</p>
+<p><img src="https://raw.githubusercontent.com/lovels/BlogResources/master/img/20200409142309.png" alt=""></p>
 <p>我们可以查一下<code>ss_user_admin</code>表和<code>user</code>看一下管理员和用户，然后登录后台，进行相应地操作。如果要设置新的管理员，我们可以再导入 user.sql 之前修改里面的信息</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fn4fi7newtj310x0hxq7n.jpg" alt="user.sql"></p>
 <p>或者我们直接写 SQL 语句来修改，<code>mysql -u root -p</code>，进入 mysql，切换 DataBase为 <code>shadowsocks</code>，执行下面的 SQL 预计即可</p>
